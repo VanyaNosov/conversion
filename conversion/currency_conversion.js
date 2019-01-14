@@ -27,12 +27,15 @@ setTimeout(funk,3000);
 
 fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
     .then(res => res.json())
-    .then(json => arrayJson(json));
-    
-
+    .then(json => arrayJson(json))
+    .catch(error => {
+       console.log(error.message);
+    })
+        
 conversion();
-
-
+// gfdgfgfgfgfgfg
+// dfddfdfdfdfdf
+// cxcdfsf
 
 // let dollarPrice = null;
 // function arrayJson (json) {
