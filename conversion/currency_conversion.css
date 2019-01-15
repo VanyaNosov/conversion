@@ -1,6 +1,6 @@
 body {
     font: 1em/1.4em sans-serif;
-    background-color: #F5F5F5;
+    background-color: black;
 }
 
 .vanya {
@@ -56,7 +56,7 @@ body {
     height: 75px;
     border: 10px solid white;
     border-radius: 50%;
-    border-top-color: blue;
+    border-top-color: red;
     position: absolute;
     left: 50%;
     top: 50%;

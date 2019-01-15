@@ -17,26 +17,37 @@ function conversion () {
 
     let options = document.getElementById("menu_block").value;
 
-    console.log(options)
+    console.log(options);
     
 };
 
-function funk () {
-    let loader = document.getElementById("page-preloader").style.visibility = 'hidden';
-}
-setTimeout(funk,3000);
 
+function funс () {
+    let loader = document.getElementById("page-preloader").style.display = 'none';
+};
 
+// setTimeout(funk,3000);
 
 fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
     .then(res => res.json())
     .then(json => arrayJson(json))
-    .catch(error => {
-       console.log(error.message);
+    .then(funС => {
+       setTimeout(funс,2000);
     })
-        
+
+    .catch(error => {
+       console.log(error.message)
+    });  
+
 conversion();
 
+
+
+
+
+
+
+// .value = innerHTML = parseInt(dollarPrice) * parseInt(number);
 
 // gfdgfgfgfgfgfg
 // dfddfdfdfdfdf
