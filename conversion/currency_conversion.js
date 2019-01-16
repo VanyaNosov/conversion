@@ -26,17 +26,11 @@ function funс () {
     let loader = document.getElementById("page-preloader").style.display = 'none';
 };
 
-// setTimeout(funk,3000);
-
 fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
     .then(res => res.json())
-    .then(json => arrayJson(json))
-    .then(funС => {
-       setTimeout(funс,2000);
-    })
-
+    .then(json => arrayJson(json), funс()) 
     .catch(error => {
-       console.log(error.message)
+       alert(error.message)
     });  
 
 conversion();
