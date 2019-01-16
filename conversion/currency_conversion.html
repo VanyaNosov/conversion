@@ -14,6 +14,7 @@
    
    <div class = "conver_val">
        <div class ="dollar">
+    <form>
            <select class="menu" onchange="conversion">
                <option value = '$' id = "menu_block">$</option>
                <option value = '€' id = "menu_block">€</option>
@@ -21,7 +22,7 @@
            </select>
            <input type="number" class ="conversion" id="Converter" oninput="conversion(this.value)" onchange="conversion(this.value)">
        </div> 
-       
+    </form>
        <div class ="grn">
            <label>Гривна</label>
            <input type="number" class ="conversion" id="convertion_dollar" disabled/>

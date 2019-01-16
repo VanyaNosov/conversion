@@ -8,16 +8,12 @@ function arrayJson (json) {
         };
 };
 
+
+
 function conversion () {
     let number = document.getElementById("Converter").value;
     console.log(number)
     let dollar_conversion = document.getElementById("convertion_dollar").value = innerHTML = parseInt(dollarPrice) * parseInt(number);
-
-    let sel = document.getElementById("menu");
-
-    let options = document.getElementById("menu_block").value;
-
-    console.log(options);
     
 };
 
@@ -34,6 +30,13 @@ fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
     });  
 
 conversion();
+
+
+
+
+
+
+
 
 
 
