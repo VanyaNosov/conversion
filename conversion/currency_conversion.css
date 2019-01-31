@@ -1,6 +1,11 @@
 body {
     font: 1em/1.4em sans-serif;
-    background-color: black;
+}
+
+.conver_val {
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .org {
@@ -31,14 +36,15 @@ body {
 }
 
 .dollar {
-    position: absolute;
+    margin-right: 50px;
+    display: inline-block;
+    
+    
 }
 
-
-
 .grn {
-    position: relative;
-    margin-left: 300px;
+   margin-left: 150px; 
+   display: inline-block;
 }
 
 .page-preloader {
@@ -75,6 +81,13 @@ body {
 
     to {
         transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    .grn {
+        margin-top: 30px;
+        margin-left: 0px;  
     }
 }
     /* .page-preloader:done {
