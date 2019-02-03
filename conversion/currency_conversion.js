@@ -35,19 +35,19 @@ function conversion () {
     }
 
     if(select.value === 'RUR'){
-        document.getElementById("convertion_dollar").value = parseInt(dollarPriceRUR) * parseInt(value);
+        document.getElementById("convertion_dollar").value = Number(dollarPriceRUR) * Number(value);
         console.log(dollarPriceRUR)
     }
 };
 
 const input = document.getElementById("Converter");
-input.addEventListener('keyup', () => conversion());
+input.addEventListener('input', () => conversion());
 
 const select = document.getElementById("bob");
 console.log(select.value);
-select.addEventListener('change', () => console.log(select.value));
+select.addEventListener('change', () => conversion());
 
-function funс () {
+function preloader () {
     document.getElementById("page-preloader").style.display = 'none';
 };
 
@@ -56,26 +56,29 @@ fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
     .then(res => res.json())
     .then((json) => {
         arrayJson(json); 
-        funс();
+        preloader();
     }) 
     .catch(error => {
-        funс();
+        preloader();
         alert(error.message);
     });  
 
 conversion();
 
 function addElement () {
-    let newDiv = document.createElement("div");
-        newDiv.innerHTML = "<h1>Money Converter</h1>"; 
-        my_div = document.getElementById("org_div1");
-        document.body.insertBefore(newDiv, my_div);
-        newDiv.style.cssText="color: red"; 
 
-        // let input3 = document.createElement("input");
-        // my_div2 = document.getElementById("org_div2");
-        // document.body.appendChild(input3 , my_div2);
+    const title = document.createElement('h1');
+        title.innerText = 'Money Converter';
+        title.style.cssText="color: red";
 
+    const parrent = document.getElementById('org_div1')
+        parrent.appendChild(title)
+        
+    const input3 = document.createElement("input");
+        input3.id = 'new_input'
+        my_div2 = document.getElementById("org_div1");
+        document.body.appendChild(input3 , my_div2);
+        title.style.cssText="color: red";
 }
 
 addElement();
