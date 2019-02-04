@@ -1,65 +1,73 @@
-let dollarPriceUSD = null;
-let dollarPriceEUR = null;
-let dollarPriceRUR = null;
+let currencies = {
+    USD: null,
+    EUR: null,
+    RUR: null
+};
 function arrayJson (json) {
-    console.log(json)
+
+    console.log(json);
+
         for(var i = 0; i < json.length; i++){
 
             if(json[i].ccy === "USD"){
-                dollarPriceUSD = json[i].buy;
+                currencies.m = json[i].buy;
             };
-
 
             if(json[i].ccy === "EUR"){
-                dollarPriceEUR = json[i].buy;
+                currencies.g = json[i].buy;
             };
       
-
             if(json[i].ccy === "RUR"){
-                dollarPriceRUR = json[i].buy;
+                currencies.v = json[i].buy;
             };
-            console.log(dollarPriceRUR)
         };
 };
 
 function conversion () {
-    const number = document.getElementById("Converter");
-    const value = number.value;
 
+    let grn = document.getElementById("convertion_dollar");
+
+    const number = document.getElementById("Converter");
+
+    const value = number.value;
+   
     if(select.value === 'USD'){
-        document.getElementById("convertion_dollar").value = parseInt(dollarPriceUSD) * parseInt(value);
-    }
+        grn.value = Number(currencies.m) * Number(value);
+    }  ;
 
     if(select.value === 'EUR'){
-        document.getElementById("convertion_dollar").value = parseInt(dollarPriceEUR) * parseInt(value);
-    }
+        grn.value = Number(currencies.g) * Number(value);
+    };
 
     if(select.value === 'RUR'){
-        document.getElementById("convertion_dollar").value = Number(dollarPriceRUR) * Number(value);
-        console.log(dollarPriceRUR)
-    }
+        grn.value = Number(currencies.v) * Number(value);
+    };
 };
 
 const input = document.getElementById("Converter");
-input.addEventListener('input', () => conversion());
+
+    input.addEventListener('input', () => conversion());
 
 const select = document.getElementById("bob");
-console.log(select.value);
-select.addEventListener('change', () => conversion());
 
-function preloader () {
+    select.addEventListener('change', () => conversion());
+
+function closePreloader () {
     document.getElementById("page-preloader").style.display = 'none';
 };
 
 
 fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
+
     .then(res => res.json())
+
     .then((json) => {
         arrayJson(json); 
-        preloader();
+        closePreloader();
     }) 
+
     .catch(error => {
-        preloader();
+        closePreloader();
         alert(error.message);
     });  
 
@@ -72,14 +80,14 @@ function addElement () {
         title.style.cssText="color: red";
 
     const parrent = document.getElementById('org_div1')
-        parrent.appendChild(title)
+        parrent.appendChild(title);
         
     const input3 = document.createElement("input");
         input3.id = 'new_input'
         my_div2 = document.getElementById("org_div1");
         document.body.appendChild(input3 , my_div2);
         title.style.cssText="color: red";
-}
+};
 
 addElement();
 
