@@ -10,15 +10,15 @@ function arrayJson (json) {
         for(var i = 0; i < json.length; i++){
 
             if(json[i].ccy === "USD"){
-                currencies.m = json[i].buy;
+                currencies.USD = json[i].buy;
             };
 
             if(json[i].ccy === "EUR"){
-                currencies.g = json[i].buy;
+                currencies.EUR = json[i].buy;
             };
       
             if(json[i].ccy === "RUR"){
-                currencies.v = json[i].buy;
+                currencies.RUR = json[i].buy;
             };
         };
 };
@@ -30,18 +30,8 @@ function conversion () {
     const number = document.getElementById("Converter");
 
     const value = number.value;
-   
-    if(select.value === 'USD'){
-        grn.value = Number(currencies.m) * Number(value);
-    }  ;
 
-    if(select.value === 'EUR'){
-        grn.value = Number(currencies.g) * Number(value);
-    };
-
-    if(select.value === 'RUR'){
-        grn.value = Number(currencies.v) * Number(value);
-    };
+    grn.value = currencies[select.value] * value;
 };
 
 const input = document.getElementById("Converter");
@@ -82,11 +72,22 @@ function addElement () {
     const parrent = document.getElementById('org_div1')
         parrent.appendChild(title);
         
-    const input3 = document.createElement("input");
-        input3.id = 'new_input'
-        my_div2 = document.getElementById("org_div1");
-        document.body.appendChild(input3 , my_div2);
-        title.style.cssText="color: red";
+    // const input3 = document.createElement("input");
+    //     input3.id = 'new_input'
+    //     my_div2 = document.getElementById("org_div1");
+    //     document.body.appendChild(input3 , my_div2);
+    //     title.style.cssText="color: red";
+        var selector = document.createElement('select');
+        const x = document.getElementById('dollar')
+        selector.id = 'bob';
+        const opt = document.createElement("option");
+        selector.options.add(opt, 5);
+        opt.id = 'menu_block';
+        opt.text = "$";
+        opt.text = "€";
+        opt.text = "₽";
+        selector.style.cssText = ""
+        document.body.appendChild(selector, x);
 };
 
 addElement();
