@@ -4,22 +4,8 @@ let currencies = {
     RUR: null
 };
 function arrayJson (json) {
-
-    console.log(json);
-
         for(var i = 0; i < json.length; i++){
-
-            if(json[i].ccy === "USD"){
-                currencies.USD = json[i].buy;
-            };
-
-            if(json[i].ccy === "EUR"){
-                currencies.EUR = json[i].buy;
-            };
-      
-            if(json[i].ccy === "RUR"){
-                currencies.RUR = json[i].buy;
-            };
+            currencies[json[i].ccy] = json[i].buy;
         };
 };
 
@@ -27,11 +13,9 @@ function conversion () {
 
     let grn = document.getElementById("convertion_dollar");
 
-    const number = document.getElementById("Converter");
+    const dollar = document.getElementById("Converter").value;
 
-    const value = number.value;
-
-    grn.value = currencies[select.value] * value;
+    grn.value = currencies[select.value] * dollar;
 };
 
 const input = document.getElementById("Converter");
@@ -81,12 +65,20 @@ function addElement () {
         const x = document.getElementById('dollar')
         selector.id = 'bob';
         const opt = document.createElement("option");
-        selector.options.add(opt, 5);
+        const opt2 = document.createElement("option");
+        const opt3 = document.createElement("option");
+        selector.options.add(opt, 1);
+        selector.options.add(opt2, 1);
+        selector.options.add(opt3, 1);
         opt.id = 'menu_block';
+        opt2.id = 'menu_block';
+        opt3.id = 'menu_block';
         opt.text = "$";
-        opt.text = "€";
-        opt.text = "₽";
-        selector.style.cssText = ""
+        opt2.text = "€";
+        opt3.text = "₽";
+        opt.value = 'USD';
+        opt2.value = 'EUR';
+        opt3.value = 'RUR';
         document.body.appendChild(selector, x);
 };
 
