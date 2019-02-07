@@ -4,7 +4,7 @@ let currencies = {
     RUR: null
 };
 function arrayJson (json) {
-        for(var i = 0; i < json.length; i++){
+        for(let i = 0; i < json.length; i++){
             currencies[json[i].ccy] = json[i].buy;
         };
 };
@@ -15,16 +15,21 @@ function conversion () {
 
     const dollar = document.getElementById("Converter").value;
 
-    grn.value = currencies[select.value] * dollar;
+    grn.value = currencies[selector.value] * dollar;
 };
+
+
 
 const input = document.getElementById("Converter");
 
     input.addEventListener('input', () => conversion());
 
-const select = document.getElementById("bob");
+    const selector2 = document.createElement('select');
 
-    select.addEventListener('change', () => conversion());
+    const selector = document.createElement('select');
+
+
+    selector.addEventListener('change', () => conversion());
 
 function closePreloader () {
     document.getElementById("page-preloader").style.display = 'none';
@@ -64,10 +69,6 @@ function addElement () {
 
         const grn = document.getElementById('grn')
 
-        const selector2 = document.createElement('select')
-
-        selector2.id = 'grn_sel';
-
         const optGrn = document.createElement("option");
 
         selector2.options.add(optGrn, 1);     
@@ -75,11 +76,9 @@ function addElement () {
         optGrn.text = "₴";
         optGrn.value = 'Грн';
 
-        var selector = document.createElement('select');
-        const x = document.getElementById('bob');
         
-        selector.id = 'bob';
-
+        const x = document.getElementById('currency');
+        
         const opt = document.createElement("option");
 
         const opt2 = document.createElement("option");
@@ -89,7 +88,7 @@ function addElement () {
         selector.options.add(opt, 1);
         selector.options.add(opt2, 1);
         selector.options.add(opt3, 1);
-        selector.id = 'bob';
+        selector.id = 'currency';
         opt.id = 'menu_block';
         opt2.id = 'menu_block';
         opt3.id = 'menu_block';
@@ -103,14 +102,12 @@ function addElement () {
 };
 
 function chg(){
-	const sel_dollar = document.getElementById("bob");
-    const  sel_grn = document.getElementById("grn_sel");
-	const  dollar_and_grn = sel_dollar.cloneNode(true);
-	const  grn_and_dollar = sel_grn.cloneNode(true);
-	sel_grn.parentNode.insertBefore(dollar_and_grn,sel_grn);
-	sel_dollar.parentNode.insertBefore(grn_and_dollar,sel_dollar);
-	sel_dollar.parentNode.removeChild(sel_dollar);
-	sel_grn.parentNode.removeChild(sel_grn);
+	const  dollar_and_grn = selector.cloneNode(true);
+	const  grn_and_dollar = selector2.cloneNode(true);
+	selector2.parentNode.insertBefore(dollar_and_grn,selector2);
+	selector.parentNode.insertBefore(grn_and_dollar,selector);
+    selector.parentNode.removeChild(selector);
+	selector2.parentNode.removeChild(selector2);
 }
 
 addElement();
