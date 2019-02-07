@@ -64,7 +64,7 @@ function addElement () {
 
         const grn = document.getElementById('grn')
 
-        const selector2 = document.createElement('select');
+        const selector2 = document.createElement('select')
 
         selector2.id = 'grn_sel';
 
@@ -72,9 +72,6 @@ function addElement () {
 
         selector2.options.add(optGrn, 1);     
         grn.appendChild(selector2);
-        
-        selector2.disabled;
-
         optGrn.text = "₴";
         optGrn.value = 'Грн';
 
@@ -104,6 +101,17 @@ function addElement () {
         opt3.value = 'RUR';
         x.appendChild(selector);
 };
+
+function chg(){
+	const sel_dollar = document.getElementById("bob");
+    const  sel_grn = document.getElementById("grn_sel");
+	const  dollar_and_grn = sel_dollar.cloneNode(true);
+	const  grn_and_dollar = sel_grn.cloneNode(true);
+	sel_grn.parentNode.insertBefore(dollar_and_grn,sel_grn);
+	sel_dollar.parentNode.insertBefore(grn_and_dollar,sel_dollar);
+	sel_dollar.parentNode.removeChild(sel_dollar);
+	sel_grn.parentNode.removeChild(sel_grn);
+}
 
 addElement();
 
