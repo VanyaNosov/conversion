@@ -61,15 +61,38 @@ function addElement () {
     //     my_div2 = document.getElementById("org_div1");
     //     document.body.appendChild(input3 , my_div2);
     //     title.style.cssText="color: red";
+
+        const grn = document.getElementById('grn')
+
+        const selector2 = document.createElement('select');
+
+        selector2.id = 'grn_sel';
+
+        const optGrn = document.createElement("option");
+
+        selector2.options.add(optGrn, 1);     
+        grn.appendChild(selector2);
+        
+        selector2.disabled;
+
+        optGrn.text = "₴";
+        optGrn.value = 'Грн';
+
         var selector = document.createElement('select');
-        const x = document.getElementById('dollar')
+        const x = document.getElementById('bob');
+        
         selector.id = 'bob';
+
         const opt = document.createElement("option");
+
         const opt2 = document.createElement("option");
+
         const opt3 = document.createElement("option");
+
         selector.options.add(opt, 1);
         selector.options.add(opt2, 1);
         selector.options.add(opt3, 1);
+        selector.id = 'bob';
         opt.id = 'menu_block';
         opt2.id = 'menu_block';
         opt3.id = 'menu_block';
@@ -79,7 +102,7 @@ function addElement () {
         opt.value = 'USD';
         opt2.value = 'EUR';
         opt3.value = 'RUR';
-        document.body.appendChild(selector, x);
+        x.appendChild(selector);
 };
 
 addElement();
