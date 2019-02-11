@@ -1,116 +1,517 @@
-let currencies = {
-    USD: null,
-    EUR: null,
-    RUR: null
-};
-function arrayJson (json) {
-        for(let i = 0; i < json.length; i++){
-            currencies[json[i].ccy] = json[i].buy;
-        };
-};
+let currencies = { 
+    USD: null, 
+    EUR: null, 
+    RUR: null,
+}; 
+ 
+let direction = false; 
+ 
+const currencyBlock = document.getElementById('currency'); 
+const grnBlock = document.getElementById('grn') 
+ 
+function arrayJson (json) { 
+    for(let i = 0; i < json.length; i++){ 
+        currencies[json[i].ccy] = json[i].buy; 
+     
+    };   
+}; 
+ 
+function conversion () { 
+ 
+    let grn = document.getElementById("convertion_dollar"); 
+ 
+    const dollar = document.getElementById("Converter").value; 
+  
+        grn.value = direction ? dollar / currencies[selector.value] : currencies[selector.value] * dollar;
+}; 
+ 
+const input = document.getElementById("Converter"); 
+ 
+    input.addEventListener('input', () => conversion()); 
+ 
+const SelectorCurrency = document.createElement('select'); 
+ 
+const selector = document.createElement('select'); 
+ 
+    selector.addEventListener('change', () => conversion()); 
+ 
+function closePreloader () { 
+    document.getElementById("page-preloader").style.display = 'none'; 
+}; 
+ 
+ 
+fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11') 
 
-function conversion () {
-
-    let grn = document.getElementById("convertion_dollar");
-
-    const dollar = document.getElementById("Converter").value;
-
-    grn.value = currencies[selector.value] * dollar;
-};
-
-
-
-const input = document.getElementById("Converter");
-
-    input.addEventListener('input', () => conversion());
-
-    const selector2 = document.createElement('select');
-
-    const selector = document.createElement('select');
-
-
-    selector.addEventListener('change', () => conversion());
-
-function closePreloader () {
-    document.getElementById("page-preloader").style.display = 'none';
-};
-
-
-fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
-
-    .then(res => res.json())
-
-    .then((json) => {
-        arrayJson(json); 
-        closePreloader();
-    }) 
-
-    .catch(error => {
-        closePreloader();
+    .then(res => res.json()) 
+ 
+    .then((json) => { 
+        arrayJson(json);  
+        closePreloader(); 
+    })  
+ 
+    .catch(error => { 
+        closePreloader(); 
         alert(error.message);
-    });  
-
-conversion();
-
-function addElement () {
-
-    const title = document.createElement('h1');
-        title.innerText = 'Money Converter';
-        title.style.cssText="color: red";
-
-    const parrent = document.getElementById('org_div1')
-        parrent.appendChild(title);
+    });   
+ 
+conversion(); 
+ 
+function addElement () { 
+ 
+    const title = document.createElement('h1'); 
+        title.innerText = 'Money Converter'; 
+        title.style.cssText="color: red"; 
+ 
+    const parrent = document.getElementById('org_div1') 
+        parrent.appendChild(title); 
+         
+        const optGrn = document.createElement("option"); 
+ 
+        SelectorCurrency.options.add(optGrn, 1);      
+        grn.appendChild(SelectorCurrency); 
+        optGrn.text = "₴"; 
+        optGrn.value = 'Грн'; 
+        optGrn.default = true; 
+ 
+    for(let i = 0; i < Object.keys(currencies).length; i++) { 
+        let opt = document.createElement("option"); 
+        opt.id = Object.keys(currencies)[i]; 
+        opt.text = Object.keys(currencies)[i]; 
+        opt.value = Object.keys(currencies)[i]; 
+        selector.appendChild(opt) 
+    } 
+    currencyBlock.appendChild(selector); 
+}; 
+ 
+function chg() { 
+    if (!direction) { 
+        currencyBlock.removeChild(selector); 
+        grnBlock.removeChild(SelectorCurrency); 
+        currencyBlock.appendChild(SelectorCurrency); 
         
-    // const input3 = document.createElement("input");
-    //     input3.id = 'new_input'
-    //     my_div2 = document.getElementById("org_div1");
-    //     document.body.appendChild(input3 , my_div2);
-    //     title.style.cssText="color: red";
-
-        const grn = document.getElementById('grn')
-
-        const optGrn = document.createElement("option");
-
-        selector2.options.add(optGrn, 1);     
-        grn.appendChild(selector2);
-        optGrn.text = "₴";
-        optGrn.value = 'Грн';
-
-        
-        const x = document.getElementById('currency');
-        
-        const opt = document.createElement("option");
-
-        const opt2 = document.createElement("option");
-
-        const opt3 = document.createElement("option");
-
-        selector.options.add(opt, 1);
-        selector.options.add(opt2, 1);
-        selector.options.add(opt3, 1);
-        selector.id = 'currency';
-        opt.id = 'menu_block';
-        opt2.id = 'menu_block';
-        opt3.id = 'menu_block';
-        opt.text = "$";
-        opt2.text = "€";
-        opt3.text = "₽";
-        opt.value = 'USD';
-        opt2.value = 'EUR';
-        opt3.value = 'RUR';
-        x.appendChild(selector);
-};
-
-function chg(){
-	const  dollar_and_grn = selector.cloneNode(true);
-	const  grn_and_dollar = selector2.cloneNode(true);
-	selector2.parentNode.insertBefore(dollar_and_grn,selector2);
-	selector.parentNode.insertBefore(grn_and_dollar,selector);
-    selector.parentNode.removeChild(selector);
-	selector2.parentNode.removeChild(selector2);
+        grn.appendChild(selector); 
+        direction = true;  
+    } else {
+        currencyBlock.removeChild(SelectorCurrency); 
+        grnBlock.removeChild(selector); 
+        currencyBlock.appendChild(selector); 
+        grnBlock.appendChild(SelectorCurrency); 
+        direction = false;  
+    } 
 }
 
 addElement();
+
+
+
+
+
+
+  // console.log(selector.value)
+   
+        // grn.value = currencies[selector.value] * dollar;
+
+        // const input3 = document.createElement("input"); 
+    //     input3.id = 'new_input' 
+    //     my_div2 = document.getElementById("org_div1"); 
+    //     document.body.appendChild(input3 , my_div2); 
+    //     title.style.cssText="color: red"; 
+         
+        // const opt = document.createElement("option"); 
+ 
+        // const opt2 = document.createElement("option"); 
+ 
+        // const opt3 = document.createElement("option"); 
+ 
+        // selector.options.add(opt, 1); 
+        // selector.options.add(opt2, 1); 
+        // selector.options.add(opt3, 1); 
+        // selector.id = 'currency_select'; 
+        // opt.id = 'menu_block'; 
+        // opt2.id = 'menu_block'; 
+        // opt3.id = 'menu_block'; 
+        // opt.text = "$"; 
+        // opt2.text = "€"; 
+        // opt3.text = "₽"; 
+        // opt.value = 'USD'; 
+        // opt2.value = 'EUR'; 
+        // opt3.value = 'RUR'; 
+
+    // dollar = grn.value / currencies
+    // grn.value = currencies[selector.value] / dollar;
+    // grn.value = currencies[selector.value] = grn.value / dollar;
+
+    // if (selector2.value === "Грн") {
+    //     dollar = grn.value / 
+    // }
+    // if(selector2 === "₴") {
+    //     grn.value = grn.value / currencies;
+    // }
+
+// let currencies = { 
+//     USD: null, 
+//     EUR: null, 
+//     RUR: null, 
+// }; 
+ 
+// let direction = 'default'; 
+ 
+// const x = document.getElementById('currency'); 
+// const grn = document.getElementById('grn') 
+ 
+ 
+ 
+// function arrayJson (json) { 
+//         for(let i = 0; i < json.length; i++){ 
+//             currencies[json[i].ccy] = json[i].buy; 
+//         }; 
+// }; 
+ 
+// function conversion () { 
+ 
+//     let grn = document.getElementById("convertion_dollar"); 
+ 
+//     const dollar = document.getElementById("Converter").value; 
+ 
+//     grn.value = currencies[selector.value] * dollar; 
+// }; 
+ 
+ 
+ 
+// const input = document.getElementById("Converter"); 
+ 
+//     input.addEventListener('input', () => conversion()); 
+ 
+// const selector2 = document.createElement('select'); 
+ 
+// const selector = document.createElement('select'); 
+ 
+ 
+//     selector.addEventListener('change', () => conversion()); 
+ 
+// function closePreloader () { 
+//     document.getElementById("page-preloader").style.display = 'none'; 
+// }; 
+ 
+ 
+// fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11') 
+ 
+//     .then(res => res.json()) 
+ 
+//     .then((json) => { 
+//         arrayJson(json);  
+//         closePreloader(); 
+//     })  
+ 
+//     .catch(error => { 
+//         closePreloader(); 
+//         alert(error.message); 
+//     });   
+ 
+// conversion(); 
+ 
+// function addElement () { 
+ 
+//     const title = document.createElement('h1'); 
+//         title.innerText = 'Money Converter'; 
+//         title.style.cssText="color: red"; 
+ 
+//     const parrent = document.getElementById('org_div1') 
+//         parrent.appendChild(title); 
+         
+    // const input3 = document.createElement("input"); 
+    //     input3.id = 'new_input' 
+    //     my_div2 = document.getElementById("org_div1"); 
+    //     document.body.appendChild(input3 , my_div2); 
+    //     title.style.cssText="color: red"; 
+ 
+ 
+        // const optGrn = document.createElement("option"); 
+ 
+        // selector2.options.add(optGrn, 1);      
+        // grn.appendChild(selector2); 
+        // optGrn.text = "₴"; 
+        // optGrn.value = 'Грн'; 
+        // optGrn.default = true; 
+ 
+ 
+         
+         
+        // const opt = document.createElement("option"); 
+ 
+        // const opt2 = document.createElement("option"); 
+ 
+        // const opt3 = document.createElement("option"); 
+ 
+        // selector.options.add(opt, 1); 
+        // selector.options.add(opt2, 1); 
+        // selector.options.add(opt3, 1); 
+        // selector.id = 'currency_select'; 
+        // opt.id = 'menu_block'; 
+        // opt2.id = 'menu_block'; 
+        // opt3.id = 'menu_block'; 
+        // opt.text = "$"; 
+        // opt2.text = "€"; 
+        // opt3.text = "₽"; 
+        // opt.value = 'USD'; 
+        // opt2.value = 'EUR'; 
+        // opt3.value = 'RUR'; 
+//         for(let i = 0; i < Object.keys(currencies).length; i++) { 
+//             let opt = document.createElement("option"); 
+//             opt.id = Object.keys(currencies)[i]; 
+//             opt.text = Object.keys(currencies)[i]; 
+//             opt.value = Object.keys(currencies)[i]; 
+//             selector.appendChild(opt) 
+//         } 
+//         x.appendChild(selector); 
+//         console.log(selector); 
+// }; 
+ 
+// function chg(){ 
+//     if(direction ===  'default') { 
+//         x.removeChild(selector); 
+//         grn.removeChild(selector2); 
+//         x.appendChild(selector2); 
+//         grn.appendChild(selector); 
+ 
+//         direction = 'reverse'  
+//     } else { 
+//         x.removeChild(selector2); 
+//         grn.removeChild(selector); 
+//         x.appendChild(selector); 
+//         grn.appendChild(selector2); 
+//         direction = 'default'  
+ 
+//     } 
+  
+// } 
+ 
+
+// let currencies = {
+//     USD: null,
+//     EUR: null,
+//     RUR: null
+// };
+// function arrayJson (json) {
+//         for(let i = 0; i < json.length; i++){
+//             currencies[json[i].ccy] = json[i].buy;
+//         };
+// };
+
+// function conversion () {
+
+//     let grn = document.getElementById("convertion_dollar");
+
+//     const dollar = document.getElementById("Converter").value;
+
+//     grn.value = currencies[selector.value] * dollar;
+// };
+
+
+
+// const input = document.getElementById("Converter");
+
+//     input.addEventListener('input', () => conversion());
+
+//     const selector2 = document.createElement('select');
+
+//     const selector = document.createElement('select');
+
+
+//     selector.addEventListener('change', () => conversion());
+
+// function closePreloader () {
+//     document.getElementById("page-preloader").style.display = 'none';
+// };
+
+
+// fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
+
+//     .then(res => res.json())
+
+//     .then((json) => {
+//         arrayJson(json); 
+//         closePreloader();
+//     }) 
+
+//     .catch(error => {
+//         closePreloader();
+//         alert(error.message);
+//     });  
+
+// conversion();
+
+// function addElement () {
+
+//     const title = document.createElement('h1');
+//         title.innerText = 'Money Converter';
+//         title.style.cssText="color: red";
+
+//     const parrent = document.getElementById('org_div1')
+//         parrent.appendChild(title);
+        
+//     const input3 = document.createElement("input");
+//         input3.id = 'new_input'
+//         my_div2 = document.getElementById("org_div1");
+//         document.body.appendChild(input3 , my_div2);
+//         title.style.cssText="color: red";
+
+//         const grn = document.getElementById('grn')
+
+//         const optGrn = document.createElement("option");
+
+//         selector2.options.add(optGrn, 1);     
+//         grn.appendChild(selector2);
+//         optGrn.text = "₴";
+//         optGrn.value = 'Грн';
+
+        
+//         const x = document.getElementById('currency');
+        
+//         const opt = document.createElement("option");
+
+//         const opt2 = document.createElement("option");
+
+//         const opt3 = document.createElement("option");
+
+//         selector.options.add(opt, 1);
+//         selector.options.add(opt2, 1);
+//         selector.options.add(opt3, 1);
+//         selector.id = 'currency';
+//         opt.id = 'menu_block';
+//         opt2.id = 'menu_block';
+//         opt3.id = 'menu_block';
+//         opt.text = "$";
+//         opt2.text = "€";
+//         opt3.text = "₽";
+//         opt.value = 'USD';
+//         opt2.value = 'EUR';
+//         opt3.value = 'RUR';
+//         x.appendChild(selector);
+// };
+
+// function chg(){
+// 	const  dollar_and_grn = selector.cloneNode(true);
+// 	const  grn_and_dollar = selector2.cloneNode(true);
+// 	selector2.parentNode.insertBefore(dollar_and_grn,selector2);
+// 	selector.parentNode.insertBefore(grn_and_dollar,selector);
+//     selector.parentNode.removeChild(selector);
+// 	selector2.parentNode.removeChild(selector2);
+// }
+
+// addElement();
+
+// let currencies = {
+//     USD: null,
+//     EUR: null,
+//     RUR: null
+// };
+// function arrayJson (json) {
+//         for(let i = 0; i < json.length; i++){
+//             currencies[json[i].ccy] = json[i].buy;
+//         };
+// };
+
+// function conversion () {
+
+//     let grn = document.getElementById("convertion_dollar");
+
+//     const dollar = document.getElementById("Converter").value;
+
+//     grn.value = currencies[selector.value] * dollar;
+// };
+
+// const input = document.getElementById("Converter");
+
+//     input.addEventListener('input', () => conversion());
+
+//     const selector2 = document.createElement('select');
+
+//     const selector = document.createElement('select');
+
+
+//     selector.addEventListener('change', () => conversion());
+
+// function closePreloader () {
+//     document.getElementById("page-preloader").style.display = 'none';
+// };
+
+
+// fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
+
+//     .then(res => res.json())
+
+//     .then((json) => {
+//         arrayJson(json); 
+//         closePreloader();
+//     }) 
+
+//     .catch(error => {
+//         closePreloader();
+//         alert(error.message);
+//     });  
+
+// conversion();
+
+// function addElement () {
+
+//     const title = document.createElement('h1');
+//         title.innerText = 'Money Converter';
+//         title.style.cssText="color: red";
+
+//     const parrent = document.getElementById('org_div1')
+//         parrent.appendChild(title);
+        
+//     const input3 = document.createElement("input");
+//         input3.id = 'new_input'
+//         my_div2 = document.getElementById("org_div1");
+//         document.body.appendChild(input3 , my_div2);
+//         title.style.cssText="color: red";
+
+//         const grn = document.getElementById('grn')
+
+//         const optGrn = document.createElement("option");
+
+//         selector2.options.add(optGrn, 1);     
+//         grn.appendChild(selector2);
+//         optGrn.text = "₴";
+//         optGrn.value = 'Грн';
+
+        
+//         const x = document.getElementById('currency');
+        
+//         const opt = document.createElement("option");
+
+//         const opt2 = document.createElement("option");
+
+//         const opt3 = document.createElement("option");
+
+//         selector.options.add(opt, 1);
+//         selector.options.add(opt2, 1);
+//         selector.options.add(opt3, 1);
+//         selector.id = 'currency';
+//         opt.id = 'menu_block';
+//         opt2.id = 'menu_block';
+//         opt3.id = 'menu_block';
+//         opt.text = "$";
+//         opt2.text = "€";
+//         opt3.text = "₽";
+//         opt.value = 'USD';
+//         opt2.value = 'EUR';
+//         opt3.value = 'RUR';
+//         x.appendChild(selector);
+// };
+
+// function chg(){
+// 	const  dollar_and_grn = selector.cloneNode(true);
+// 	const  grn_and_dollar = selector2.cloneNode(true);
+// 	selector2.parentNode.insertBefore(dollar_and_grn,selector2);
+// 	selector.parentNode.insertBefore(grn_and_dollar,selector);
+//     selector.parentNode.removeChild(selector);
+// 	selector2.parentNode.removeChild(selector2);
+// }
+
+// addElement();
 
 
     
