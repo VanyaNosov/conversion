@@ -1,3 +1,19 @@
+const SelectorCurrency = document.createElement('select'); 
+
+const selector = document.createElement('select'); 
+
+const currencyBlock = document.getElementById('currency'); 
+
+const grnBlock = document.getElementById('grn'); 
+
+const button = document.getElementById('button');
+
+button.onclick = function () {chg();conversion()};
+
+selector.style.cssText="cursor: pointer";
+
+SelectorCurrency.style.cssText="cursor: pointer";
+
 let currencies = { 
     USD: null, 
     EUR: null, 
@@ -6,39 +22,30 @@ let currencies = {
  
 let direction = false; 
  
-const currencyBlock = document.getElementById('currency'); 
-const grnBlock = document.getElementById('grn') 
- 
 function arrayJson (json) { 
     for(let i = 0; i < json.length; i++){ 
         currencies[json[i].ccy] = json[i].buy; 
      
     };   
 }; 
- 
+
 function conversion () { 
  
-    let grn = document.getElementById("convertion_dollar"); 
+    let Amount_Of_Conversion = document.getElementById("convertion_dollar"); 
  
-    const dollar = document.getElementById("Converter").value; 
-  
-        grn.value = direction ? dollar / currencies[selector.value] : currencies[selector.value] * dollar;
+    const Number_Of_Currencies = document.getElementById("Converter").value; 
+
+        Amount_Of_Conversion.value = direction ? Number_Of_Currencies / currencies[selector.value] : currencies[selector.value] * Number_Of_Currencies;
 }; 
  
 const input = document.getElementById("Converter"); 
  
     input.addEventListener('input', () => conversion()); 
- 
-const SelectorCurrency = document.createElement('select'); 
- 
-const selector = document.createElement('select'); 
- 
     selector.addEventListener('change', () => conversion()); 
- 
+
 function closePreloader () { 
     document.getElementById("page-preloader").style.display = 'none'; 
 }; 
- 
  
 fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11') 
 
@@ -56,39 +63,35 @@ fetch('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11')
  
 conversion(); 
  
-function addElement () { 
+const title = document.createElement('h1'); 
+    title.innerText = 'Money Converter'; 
+    title.style.cssText="color: red"; 
  
-    const title = document.createElement('h1'); 
-        title.innerText = 'Money Converter'; 
-        title.style.cssText="color: red"; 
- 
-    const parrent = document.getElementById('org_div1') 
-        parrent.appendChild(title); 
+const parrent = document.getElementById('org_div1')
+    parrent.appendChild(title); 
          
-        const optGrn = document.createElement("option"); 
+const optGrn = document.createElement("option"); 
  
-        SelectorCurrency.options.add(optGrn, 1);      
-        grn.appendChild(SelectorCurrency); 
-        optGrn.text = "₴"; 
-        optGrn.value = 'Грн'; 
-        optGrn.default = true; 
+    SelectorCurrency.options.add(optGrn, 1);      
+    grn.appendChild(SelectorCurrency); 
+    optGrn.text = "₴"; 
+    optGrn.value = 'Грн'; 
+    optGrn.default = true; 
  
-    for(let i = 0; i < Object.keys(currencies).length; i++) { 
-        let opt = document.createElement("option"); 
-        opt.id = Object.keys(currencies)[i]; 
-        opt.text = Object.keys(currencies)[i]; 
-        opt.value = Object.keys(currencies)[i]; 
-        selector.appendChild(opt) 
-    } 
+for(let i = 0; i < Object.keys(currencies).length; i++) { 
+    let opt = document.createElement("option"); 
+    opt.id = Object.keys(currencies)[i]; 
+    opt.text = Object.keys(currencies)[i]; 
+    opt.value = Object.keys(currencies)[i]; 
+    selector.appendChild(opt) 
+} 
     currencyBlock.appendChild(selector); 
-}; 
  
 function chg() { 
     if (!direction) { 
         currencyBlock.removeChild(selector); 
         grnBlock.removeChild(SelectorCurrency); 
-        currencyBlock.appendChild(SelectorCurrency); 
-        
+        currencyBlock.appendChild(SelectorCurrency);    
         grn.appendChild(selector); 
         direction = true;  
     } else {
@@ -100,7 +103,6 @@ function chg() {
     } 
 }
 
-addElement();
 
 
 

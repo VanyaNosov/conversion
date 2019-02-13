@@ -8,10 +8,6 @@ body {
     width: 100%;
 }
 
-.org {
-    
-}
-
 .vanya {
     color: red;
 }
@@ -75,7 +71,7 @@ body {
     animation: 2s spin infinite linear;
 }
 
-@keyframes spin {
+/* @keyframes spin {
     from {
         transform: translate(-50%, -50%) rotate(0deg);
     }
@@ -83,12 +79,24 @@ body {
     to {
         transform: translate(-50%, -50%) rotate(360deg);
     }
+} */
+
+@media only screen and (max-width: 700px) {
+    .grn {
+        margin-left: 0px;  
+    }
 }
 
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 650px) {
     .grn {
-        margin-top: 30px;
+        margin-top: 50px;
         margin-left: 0px;  
+    }
+
+    .button {
+        margin-top: 50px;
+        width: 120px;
+        display: block;
     }
 }
 
