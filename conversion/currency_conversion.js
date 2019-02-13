@@ -29,18 +29,16 @@ function arrayJson (json) {
     };   
 }; 
 
+const Number_Of_Currencies = document.getElementById("Converter"); 
+
 function conversion () { 
  
     let Amount_Of_Conversion = document.getElementById("convertion_dollar"); 
  
-    const Number_Of_Currencies = document.getElementById("Converter").value; 
-
-        Amount_Of_Conversion.value = direction ? Number_Of_Currencies / currencies[selector.value] : currencies[selector.value] * Number_Of_Currencies;
+        Amount_Of_Conversion.value = direction ? Number_Of_Currencies.value / currencies[selector.value] : currencies[selector.value] * Number_Of_Currencies.value;
 }; 
  
-const input = document.getElementById("Converter"); 
- 
-    input.addEventListener('input', () => conversion()); 
+    Number_Of_Currencies.addEventListener('input', () => conversion()); 
     selector.addEventListener('change', () => conversion()); 
 
 function closePreloader () { 
